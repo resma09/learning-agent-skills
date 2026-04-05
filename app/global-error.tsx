@@ -1,19 +1,33 @@
-'use client' // Error boundaries must be Client Components
+"use client";
 
 export default function GlobalError({
     error,
-    unstable_retry,
+    reset,
 }: {
-    error: Error & { digest?: string }
-    unstable_retry: () => void
+    error: Error & { digest?: string };
+    reset: () => void;
 }) {
     return (
-        // global-error must include html and body tags
         <html>
-            <body className="min-h-screen h-full antialiased text-center p-16">
-                <h2>Something went wrong!</h2>
-                <button className="btn btn-primary py-4" onClick={() => unstable_retry()}>Try again</button>
+            <body>
+                <div className="min-h-[50vh] flex items-center justify-center p-4">
+                    <div className="text-center">
+                        <div className="text-6xl mb-4">😵</div>
+                        <h2 className="text-2xl font-bold mb-2">Something went wrong!</h2>
+                        <p className="text-base-content/70 mb-4">
+                            {error.message || "An unexpected error occurred"}
+                        </p>
+                        <div className="flex gap-4 justify-center">
+                            <button onClick={() => reset()} className="btn btn-primary">
+                                Try again
+                            </button>
+                            <a href="/" className="btn btn-ghost">
+                                Go home
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </body>
         </html>
-    )
+    );
 }

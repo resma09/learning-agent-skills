@@ -1,6 +1,6 @@
 "use client";
 import { useActionState } from "react";
-import { createSkill } from "@/app/actions/skills";
+import { createSkill } from "@/actions/skills";
 
 const initialState = {
     message: " ",
